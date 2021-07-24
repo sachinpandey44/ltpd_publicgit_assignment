@@ -11,10 +11,10 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        GithubRepository(apiService: GithubAPIService()).fetchRespositories { (repositoryRecords, error) in
-            print("repositoryRecords:\(String(describing: repositoryRecords))")
-            print("error:\(String(describing: error))")
-        }
+//        GithubRepository(apiService: GithubAPIService()).fetchRespositories { (repositoryRecords, error) in
+//            print("repositoryRecords:\(String(describing: repositoryRecords))")
+//            print("error:\(String(describing: error))")
+//        }
         return true
     }
 

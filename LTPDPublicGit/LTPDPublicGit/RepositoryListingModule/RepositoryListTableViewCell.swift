@@ -24,4 +24,7 @@ class RepositoryListTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    func setImage(url: String?) {
+        
+    }
 }

@@ -8,38 +8,40 @@
 import UIKit
 
 class RepositoryListTableViewController: UITableViewController {
-
+    var repositoryListViewModel: RepositoryListViewModel!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        let apiService = GithubAPIService()
+        let repository = GithubRepository(apiService: apiService)
+        repositoryListViewModel = RepositoryListViewModel(repository: repository, delegate: self)
+        repositoryListViewModel.didReceivedEvent(event: .viewDidLoad)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return repositoryListViewModel.rowsData.count
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "RepositoryListTableViewCell", for: indexPath) as! RepositoryListTableViewCell
 
         // Configure the cell...
-
+        let currentRow =  repositoryListViewModel.rowsData[indexPath.row]
+        cell.repoNameLabel.text = currentRow.displayName
+        cell.repoTypeLabel.text = currentRow.type
+        cell.repoDOCLabel.text = currentRow.dateOfCreation
+        cell.setImage(url: currentRow.owner.getAvatarURL())
         return cell
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.
@@ -85,5 +87,25 @@ class RepositoryListTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    func showLoading() {
+        
+    }
+    
+    func showAlert(error: Error) {
+        
+    }
+    
+}
 
+extension RepositoryListTableViewController: RepositoryListViewModelDelegate {
+    func didUpdateState(state: RepositoryListViewModelState) {
+        switch state {
+        case .loading:
+            showLoading()
+        case .error(let error):
+            showAlert(error: error)
+        case .repositoryFetched:
+            self.tableView.reloadData()
+        }
+    }
 }

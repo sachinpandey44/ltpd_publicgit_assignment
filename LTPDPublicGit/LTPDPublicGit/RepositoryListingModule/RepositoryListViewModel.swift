@@ -11,7 +11,7 @@ import UIKit
 enum RepositoryListViewModelState {
     case loading
     case repositoryFetched
-    case error
+    case error(APIServiceErrors)
 }
 
 enum RepositoryListDelegateEvent {
@@ -28,17 +28,19 @@ protocol RepositoryListViewModelProtocol: class {
     var delegate: RepositoryListViewModelDelegate? { get set }
     var gitRespository: GithubRepositoryProtocol? { get set }
     var state: RepositoryListViewModelState { get set }
-    var sections: [RepositoryRecord] { get set }
+    var rowsData: [RepositoryRecord] { get set }
     func didReceivedEvent(event: RepositoryListDelegateEvent)
 }
 
 class RepositoryListViewModel: RepositoryListViewModelProtocol {
     weak var delegate: RepositoryListViewModelDelegate?
     var gitRespository: GithubRepositoryProtocol?
-    var sections: [RepositoryRecord] = []
+    var rowsData: [RepositoryRecord] = []
     var state: RepositoryListViewModelState = .loading {
         didSet {
-            delegate?.didUpdateState(state: state)
+            DispatchQueue.main.async {
+                self.delegate?.didUpdateState(state: self.state)
+            }
         }
     }
     
@@ -50,7 +52,21 @@ class RepositoryListViewModel: RepositoryListViewModelProtocol {
     func didReceivedEvent(event: RepositoryListDelegateEvent) {
         switch event {
         case .viewDidLoad:
-            //TODO: fetch the repos list
+            //Fetch the repos list
+            self.state = .loading
+            gitRespository?.fetchRespositories(completion: { [weak self](records, error) in
+                guard let self = self else {
+                    print("Unexpected. Self found to be nil")
+                    return
+                }
+                guard let records = records else {
+                    self.rowsData = []
+                    self.state = .error(error as? APIServiceErrors ?? .genericError)
+                    return
+                }
+                self.rowsData = records
+                self.state = .repositoryFetched
+            })
         break
         case .viewWillAppear:
             break
