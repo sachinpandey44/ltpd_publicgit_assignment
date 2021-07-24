@@ -14,6 +14,7 @@ struct BaseURL {
 enum APIServiceErrors: Error {
     case genericError
     case parsingError
+    case notImplementedError(String)
 }
 
 protocol GithubAPIServiceProtocol: class {

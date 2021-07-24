@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,6 +16,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="bOr-0q-IiF">
+                            <rect key="frame" x="0.0" y="136" width="414" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zn5-JA-c5R">
+                                    <rect key="frame" x="191" y="7" width="32" height="30"/>
+                                    <state key="normal" title="Next"/>
+                                    <connections>
+                                        <action selector="fetchNextPageWithSender:" destination="bFS-a7-qUU" eventType="touchUpInside" id="8Lt-c8-es1"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstItem="Zn5-JA-c5R" firstAttribute="centerX" secondItem="bOr-0q-IiF" secondAttribute="centerX" id="OpQ-E3-Fnc"/>
+                                <constraint firstItem="Zn5-JA-c5R" firstAttribute="centerY" secondItem="bOr-0q-IiF" secondAttribute="centerY" id="YHf-lK-BCs"/>
+                            </constraints>
+                        </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RepositoryListTableViewCell" rowHeight="80" id="pXc-dP-9YV" customClass="RepositoryListTableViewCell" customModule="LTPDPublicGit" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="80"/>
@@ -67,6 +86,7 @@
                                     <outlet property="repoDOCLabel" destination="LvU-NX-ndU" id="rY1-jG-Jmf"/>
                                     <outlet property="repoNameLabel" destination="hmJ-kZ-vxY" id="0pL-e6-ukK"/>
                                     <outlet property="repoTypeLabel" destination="Hw9-lT-KV1" id="GQa-6b-A5F"/>
+                                    <segue destination="Tla-cm-cX5" kind="show" identifier="ShowDetails" id="CHT-yF-i7d"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -80,6 +100,39 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jNZ-i8-edW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2002.8985507246377" y="28.794642857142854"/>
+        </scene>
+        <!--Repository Details View Controller-->
+        <scene sceneID="1xB-sU-Mta">
+            <objects>
+                <viewController id="Tla-cm-cX5" customClass="RepositoryDetailsViewController" customModule="LTPDPublicGit" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="aGC-xz-YTW">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q4P-n5-hEW">
+                                <rect key="frame" x="20" y="108" width="374" height="734"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="L78-0D-Piy"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="L78-0D-Piy" firstAttribute="trailing" secondItem="Q4P-n5-hEW" secondAttribute="trailing" constant="20" id="6Rb-Yv-Eiw"/>
+                            <constraint firstItem="Q4P-n5-hEW" firstAttribute="top" secondItem="L78-0D-Piy" secondAttribute="top" constant="20" id="OUh-J8-DPy"/>
+                            <constraint firstItem="L78-0D-Piy" firstAttribute="bottom" secondItem="Q4P-n5-hEW" secondAttribute="bottom" constant="20" id="T80-YL-8fD"/>
+                            <constraint firstItem="Q4P-n5-hEW" firstAttribute="leading" secondItem="L78-0D-Piy" secondAttribute="leading" constant="20" id="bec-rW-GgB"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="o1S-Sc-r2E"/>
+                    <connections>
+                        <outlet property="detailsLabel" destination="Q4P-n5-hEW" id="pyw-nN-NLP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dpc-Mx-wpp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2936" y="29"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="7EF-ZZ-DWN">

@@ -17,7 +17,7 @@ enum RepositoryListViewModelState {
 enum RepositoryListDelegateEvent {
     case viewDidLoad
     case viewWillAppear
-    case reachedEndOfList
+    case fetchNextPage
 }
 
 protocol RepositoryListViewModelDelegate: UIViewController {
@@ -29,6 +29,7 @@ protocol RepositoryListViewModelProtocol: class {
     var gitRespository: GithubRepositoryProtocol? { get set }
     var state: RepositoryListViewModelState { get set }
     var rowsData: [RepositoryRecord] { get set }
+    var nextPage: String? { get set }
     func didReceivedEvent(event: RepositoryListDelegateEvent)
 }
 
@@ -36,6 +37,7 @@ class RepositoryListViewModel: RepositoryListViewModelProtocol {
     weak var delegate: RepositoryListViewModelDelegate?
     var gitRespository: GithubRepositoryProtocol?
     var rowsData: [RepositoryRecord] = []
+    var nextPage: String?
     var state: RepositoryListViewModelState = .loading {
         didSet {
             DispatchQueue.main.async {
@@ -54,7 +56,7 @@ class RepositoryListViewModel: RepositoryListViewModelProtocol {
         case .viewDidLoad:
             //Fetch the repos list
             self.state = .loading
-            gitRespository?.fetchRespositories(completion: { [weak self](records, error) in
+            gitRespository?.fetchRespositories(completion: { [weak self](records, next, error) in
                 guard let self = self else {
                     print("Unexpected. Self found to be nil")
                     return
@@ -65,13 +67,15 @@ class RepositoryListViewModel: RepositoryListViewModelProtocol {
                     return
                 }
                 self.rowsData = records
+                self.nextPage = next
                 self.state = .repositoryFetched
             })
         break
         case .viewWillAppear:
             break
-        case .reachedEndOfList:
+        case .fetchNextPage:
             //TODO: fetch next page of repos
+            self.state = .error(.notImplementedError("Functionality not implemented"))
             break
         }
     }

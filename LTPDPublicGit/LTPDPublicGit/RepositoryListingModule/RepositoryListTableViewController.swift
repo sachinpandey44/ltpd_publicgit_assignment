@@ -57,15 +57,20 @@ class RepositoryListTableViewController: UITableViewController {
     }
 
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        guard let detailsViewController = segue.destination as? RepositoryDetailsViewController,
+              let selectedRow = tableView.indexPathForSelectedRow?.row else {
+            return
+        }
+        let detailsViewModel = RepositoryDetailsViewModel(record: repositoryListViewModel.rowsData[selectedRow])
+        detailsViewController.detailsViewModel = detailsViewModel
     }
-    */
+
     func showLoading() {
         self.view.bringSubviewToFront(activityIndicatorView)
         activityIndicatorView.startAnimating()
@@ -82,6 +87,16 @@ class RepositoryListTableViewController: UITableViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
+    func reloadUI() {
+        if repositoryListViewModel.nextPage == nil {
+            tableView.tableFooterView?.isHidden = true;
+        }
+        self.tableView.reloadData()
+    }
+    
+    @IBAction func fetchNextPage(sender: Any) {
+        repositoryListViewModel.didReceivedEvent(event: .fetchNextPage)
+    }
 }
 
 extension RepositoryListTableViewController: RepositoryListViewModelDelegate {
@@ -93,7 +108,7 @@ extension RepositoryListTableViewController: RepositoryListViewModelDelegate {
         case .error(let error):
             showAlert(error: error)
         case .repositoryFetched:
-            self.tableView.reloadData()
+            reloadUI()
         }
     }
 }

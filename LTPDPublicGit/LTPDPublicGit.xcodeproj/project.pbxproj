@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		D83F4F3926ABAB4100150B26 /* GithubRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83F4F3826ABAB4100150B26 /* GithubRepository.swift */; };
 		D8A7EE7226ABDFE300C1655C /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A7EE7126ABDFE300C1655C /* UIViewControllerExtension.swift */; };
+		D8A7EE7B26ABE42A00C1655C /* RepositoryDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A7EE7A26ABE42A00C1655C /* RepositoryDetailsViewModel.swift */; };
+		D8A7EE8326ABE44F00C1655C /* RepositoryDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A7EE8226ABE44F00C1655C /* RepositoryDetailsViewController.swift */; };
+		D8A7EE8826AC03E100C1655C /* GithubMockAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A7EE8726AC03E100C1655C /* GithubMockAPIService.swift */; };
 		D8B2861E26AAC67100AA1AA8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B2861D26AAC67100AA1AA8 /* AppDelegate.swift */; };
 		D8B2862026AAC67100AA1AA8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B2861F26AAC67100AA1AA8 /* SceneDelegate.swift */; };
 		D8B2862226AAC67100AA1AA8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B2862126AAC67100AA1AA8 /* ViewController.swift */; };
@@ -44,6 +47,9 @@
 /* Begin PBXFileReference section */
 		D83F4F3826ABAB4100150B26 /* GithubRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubRepository.swift; sourceTree = "<group>"; };
 		D8A7EE7126ABDFE300C1655C /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		D8A7EE7A26ABE42A00C1655C /* RepositoryDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryDetailsViewModel.swift; sourceTree = "<group>"; };
+		D8A7EE8226ABE44F00C1655C /* RepositoryDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryDetailsViewController.swift; sourceTree = "<group>"; };
+		D8A7EE8726AC03E100C1655C /* GithubMockAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubMockAPIService.swift; sourceTree = "<group>"; };
 		D8B2861A26AAC67100AA1AA8 /* LTPDPublicGit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LTPDPublicGit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8B2861D26AAC67100AA1AA8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D8B2861F26AAC67100AA1AA8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -106,6 +112,15 @@
 			path = Repositories;
 			sourceTree = "<group>";
 		};
+		D8A7EE7926ABE3DE00C1655C /* RespositoryDetailsModule */ = {
+			isa = PBXGroup;
+			children = (
+				D8A7EE7A26ABE42A00C1655C /* RepositoryDetailsViewModel.swift */,
+				D8A7EE8226ABE44F00C1655C /* RepositoryDetailsViewController.swift */,
+			);
+			path = RespositoryDetailsModule;
+			sourceTree = "<group>";
+		};
 		D8B2861126AAC67100AA1AA8 = {
 			isa = PBXGroup;
 			children = (
@@ -141,6 +156,7 @@
 				D8B2862626AAC67500AA1AA8 /* Assets.xcassets */,
 				D8B2862826AAC67500AA1AA8 /* LaunchScreen.storyboard */,
 				D8B2862B26AAC67600AA1AA8 /* Info.plist */,
+				D8A7EE7926ABE3DE00C1655C /* RespositoryDetailsModule */,
 			);
 			path = LTPDPublicGit;
 			sourceTree = "<group>";
@@ -177,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				D8B2866A26AAE9D800AA1AA8 /* GithubAPIService.swift */,
+				D8A7EE8726AC03E100C1655C /* GithubMockAPIService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -313,8 +330,11 @@
 			files = (
 				D83F4F3926ABAB4100150B26 /* GithubRepository.swift in Sources */,
 				D8B2866526AAC89300AA1AA8 /* RepositoryListTableViewCell.swift in Sources */,
+				D8A7EE7B26ABE42A00C1655C /* RepositoryDetailsViewModel.swift in Sources */,
 				D8A7EE7226ABDFE300C1655C /* UIViewControllerExtension.swift in Sources */,
 				D8B2865626AAC77700AA1AA8 /* RepositoryRecord.swift in Sources */,
+				D8A7EE8826AC03E100C1655C /* GithubMockAPIService.swift in Sources */,
+				D8A7EE8326ABE44F00C1655C /* RepositoryDetailsViewController.swift in Sources */,
 				D8B2862226AAC67100AA1AA8 /* ViewController.swift in Sources */,
 				D8B2861E26AAC67100AA1AA8 /* AppDelegate.swift in Sources */,
 				D8B2866026AAC86D00AA1AA8 /* RepositoryListTableViewController.swift in Sources */,
